@@ -1,0 +1,9 @@
+{
+  "date": "2026-09-06",
+  "timezone": "Asia/Shanghai (UTC+8)",
+  "title": "China Tech Watch & USA Biotech Intelligence",
+  "generated_at": "2026-09-07T07:50:00+08:00",
+  "note": "完整结构化数据见仓库 data/2026-09-06.json，网页内容已同步。后续每日追加新 JSON。",
+  "sections_summary": ["top10", "stronger", "weaker", "ratings", "attention", "supplychain", "biotech", "watchlist"],
+  "accounts_seed_count": 20
+}
