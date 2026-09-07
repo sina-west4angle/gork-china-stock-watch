@@ -3,7 +3,170 @@
   "timezone": "Asia/Shanghai (UTC+8)",
   "title": "China Tech Watch & USA Biotech Intelligence",
   "generated_at": "2026-09-07T07:50:00+08:00",
-  "note": "完整结构化数据见仓库 data/2026-09-06.json，网页内容已同步。后续每日追加新 JSON。",
-  "sections_summary": ["top10", "stronger", "weaker", "ratings", "attention", "supplychain", "biotech", "watchlist"],
-  "accounts_seed_count": 20
+  "sections": {
+    "top10": [
+      {
+        "rank": 1,
+        "title": "国内 AI 芯片产能预期上修：卖方口径指向 2028 年底中芯先进产能显著高于 JPM 保守预测",
+        "tags": ["中国科技", "产能/供需", "看多"],
+        "impact_score": 82,
+        "what_changed": "市场此前引用的摩根大通约 500 万颗（2028）中国 AI 大芯片出货预测被部分产业链观察者认为偏保守。卖方口径显示中芯 N+1/N+2/N+3 先进产能有望从 2025 年底约 2.6 万片/月向 2028 年底 8–10 万片/月爬升，名义晶圆足以支撑更高出货，关键变量转为昇腾类大芯片切分比例、良率与 HBM/封装配套。",
+        "why_it_matters": "直接影响国产算力供应链（中芯、华为昇腾生态、封测与存储配套）的中长期供给预期与估值弹性。",
+        "category": "A 中国公司研究 · 产能",
+        "sources": [{"label": "@LXC_X_ 讨论 JPM 预测 vs 产能口径", "url": "https://x.com/LXC_X_/status/2096748053093134769"}]
+      },
+      {
+        "rank": 2,
+        "title": "NMPA 9 月批准波：五款新药 + 两项新适应症获批",
+        "tags": ["中国生物医药", "审批", "看多"],
+        "impact_score": 78,
+        "what_changed": "中国国家药品监督管理局（NMPA）在 9 月审批波中清除了五款新药及两项新适应症，显示创新药审评节奏维持积极。",
+        "why_it_matters": "审批节奏直接影响相关公司商业化时间表与现金流预期，对 license-out 与国内定价谈判也有信号意义。",
+        "category": "F 中国生物医药 · NMPA",
+        "sources": [{"label": "@Biopharm_China · NMPA 9月批准波", "url": "https://x.com/Biopharm_China/status/2096720591675904383"}]
+      },
+      {
+        "rank": 3,
+        "title": "正大天晴 HER2 双抗 ADC TQB2102 III 期达到终点，准备中国申报",
+        "tags": ["中国生物医药", "临床/ADC", "看多"],
+        "impact_score": 85,
+        "what_changed": "正大天晴（CTTQ）的 HER2 双特异性 ADC TQB2102 在 HER2-low 乳腺癌 III 期试验中达到主要终点，公司准备推进中国申报。",
+        "why_it_matters": "ADC + 双抗是当前中国创新药出海与 license-out 的高关注赛道；III 期阳性结果显著提升该资产的商业与 BD 价值。",
+        "category": "F 中国生物医药 · ADC · 临床",
+        "sources": [{"label": "@Biopharm_China · TQB2102 III期终点", "url": "https://x.com/Biopharm_China/status/2096693418739032527"}]
+      },
+      {
+        "rank": 4,
+        "title": "上海成为海外患者癌症治疗新目的地：成本 + 创新疗法可及性提升",
+        "tags": ["中国生物医药", "商业化/出海", "看多"],
+        "impact_score": 70,
+        "what_changed": "媒体报道显示，上海正吸引美国及其他富裕国家癌症患者前来治疗，原因不仅是成本较低，还包括中国在新型癌症疗法上的可及性与创新进展。",
+        "why_it_matters": "反映中国创新药与临床服务在部分领域已具备跨境吸引力，对长期“创新药出海”叙事形成侧面支撑。",
+        "category": "F 中国生物医药 · 商业化",
+        "sources": [
+          {"label": "@Richard77778888 转述 WSJ", "url": "https://x.com/Richard77778888/status/2096863005988549023"},
+          {"label": "WSJ原文", "url": "https://www.wsj.com/health/healthcare/patients-are-flying-to-china-for-the-latest-cancer-treatment-528659c3"}
+        ]
+      },
+      {
+        "rank": 5,
+        "title": "美股资金向 AI 半导体与存储集中，$MU 表现突出，HBM 产能扩张预期升温",
+        "tags": ["全球科技", "存储/HBM", "看多"],
+        "impact_score": 75,
+        "what_changed": "近期美股出现明显分化，半导体与存储板块（尤其是 $MU）表现强势，市场焦点集中在 HBM 产能扩张预期；同时就业数据推升利率预期，对高估值科技股形成压制。",
+        "why_it_matters": "HBM 供需与价格直接影响全球 AI 算力成本，并可能传导至中国相关存储与封测公司的订单与盈利预期。",
+        "category": "E 全球产业链 → 中国公司",
+        "sources": [{"label": "@FernlundAn · 美股分化与 $MU / HBM", "url": "https://x.com/FernlundAn/status/2096749911811543287"}]
+      },
+      {
+        "rank": 6,
+        "title": "中国创新药执行力被海外从业者进一步确认：R&D 速度与规模优势明显",
+        "tags": ["中国生物医药", "产业格局", "中性"],
+        "impact_score": 72,
+        "what_changed": "多位有中国实地调研经历的海外生物科技从业者持续强调：中国 biotech 在可工程化的药理学问题上执行速度与规模已形成明显优势；美国优势仍在新型生物学与转化医学深度。",
+        "why_it_matters": "这强化了“中国执行 + 美国新颖生物学”的合作/竞争框架，影响 license-in/out 定价与管线布局策略。",
+        "category": "C 大V/投资者观点 · D 海外关注",
+        "sources": [{"label": "@davidycli 中国biotech执行力讨论", "url": "https://x.com/davidycli/status/1875043192330224119"}]
+      },
+      {
+        "rank": 7,
+        "title": "中国 GLP-1 / 减重药物市场竞争加剧：信达等国内玩家与诺和/礼来/辉瑞博弈",
+        "tags": ["中国生物医药", "竞争格局", "中性"],
+        "impact_score": 68,
+        "what_changed": "中国肥胖症药物市场被多方视为重要战场，处方药广告限制下“隐形推广”与渠道策略成为焦点；信达生物等国内公司与跨国药企在 GLP-1 赛道的竞争与合作并存。",
+        "why_it_matters": "减重赛道是全球最高关注度治疗领域之一，中国市场准入与价格策略将影响相关公司估值与出海节奏。",
+        "category": "F 中国生物医药 · GLP-1",
+        "sources": [{"label": "@nikkeimatome · 中国GLP-1市场竞争", "url": "https://x.com/nikkeimatome/status/2096686175541146060"}]
+      },
+      {
+        "rank": 8,
+        "title": "华为持续加大基础技术投入，在国产替代叙事中角色进一步强化",
+        "tags": ["中国科技", "国产替代", "看多"],
+        "impact_score": 74,
+        "what_changed": "近期报道与分析继续强调华为在研发上的大规模投入，试图替代失去的美国技术，并在更多中国企业中成为关键供应商/平台。",
+        "why_it_matters": "华为生态的扩张直接影响上游半导体设备、材料、EDA 与下游应用公司的订单可见度。",
+        "category": "A 中国公司研究 · 经营变化",
+        "sources": [{"label": "@TheEconomist · 华为研发与国产替代", "url": "https://x.com/TheEconomist/status/2096428203434770667"}]
+      },
+      {
+        "rank": 9,
+        "title": "中国存储器（CXMT 等）在行业低谷期扩产，试图打破长期寡头格局",
+        "tags": ["中国科技", "存储", "看多"],
+        "impact_score": 71,
+        "what_changed": "长鑫等中国存储企业在行业下行期继续扩产，利用全球对手聚焦 AI 带来的窗口，试图改写持续约 30 年的存储寡头格局。",
+        "why_it_matters": "供给端变化可能影响 DRAM/NAND 价格周期，并带动国内设备与材料公司的中长期订单。",
+        "category": "A 中国公司研究 · 产能",
+        "sources": [{"label": "@TMTPostGlobal · CXMT 存储器反击", "url": "https://x.com/TMTPostGlobal/status/2081920862241124487"}]
+      },
+      {
+        "rank": 10,
+        "title": "海外机构对中国 AI / 芯片公司的讨论热度维持高位，但 Attention ≠ Bullish",
+        "tags": ["中国科技", "关注度", "中性"],
+        "impact_score": 65,
+        "what_changed": "多个高质量海外账号与研究机构持续讨论中国 AI 模型、开源进展与芯片供应链。Attention Score 上升，但 Sentiment 与 Fundamental 需单独跟踪，避免把“被讨论”直接等同于“看多”。",
+        "why_it_matters": "符合 D 类指标拆分：Attention / Sentiment / Fundamental 三者独立。",
+        "category": "D 海外机构关注变化",
+        "sources": [
+          {"label": "@TMTPostGlobal", "url": "https://x.com/TMTPostGlobal"},
+          {"label": "@dylan522p", "url": "https://x.com/dylan522p"}
+        ]
+      }
+    ],
+    "stronger": [
+      {
+        "title": "国产 AI 芯片供应链（中芯相关先进产能）",
+        "change": "看多 → 更看多",
+        "detail": "部分产业链与卖方讨论从“供给严重不足”转向“名义产能可能快于部分外资行预测”，关键瓶颈从“有没有晶圆”转向“大芯片切分比例 + 良率 + HBM 配套”。",
+        "window": "约 30 天"
+      },
+      {
+        "title": "中国 ADC / 双抗创新药资产",
+        "change": "中性 → 看多",
+        "detail": "TQB2102 III 期阳性等事件强化“中国 ADC 资产具备全球竞争力”的叙事，license-out 与国内申报预期同步上修。",
+        "window": "约 7–30 天"
+      }
+    ],
+    "weaker": [
+      {
+        "title": "高估值纯 AI 应用/模型公司（部分）",
+        "change": "关注度高但盈利路径仍模糊",
+        "detail": "海外讨论对中国开源模型能力表示认可，但对商业化与算力成本的可持续性仍存分歧。Attention 高 ≠ 基本面立即转强。"
+      },
+      {
+        "title": "利率敏感的高估值科技板块（间接）",
+        "change": "宏观压制",
+        "detail": "美股就业数据推升利率预期，对全球高估值科技形成共性压力，可能间接影响中概与港股科技估值中枢。"
+      }
+    ],
+    "watchlist": [
+      { "name": "中芯国际相关先进产能", "ticker": "国产算力核心", "heat": "高 · 产能爬坡" },
+      { "name": "华为昇腾生态", "ticker": "AI 芯片需求", "heat": "高 · 国产替代" },
+      { "name": "正大天晴 / ADC 资产", "ticker": "TQB2102", "heat": "事件驱动" },
+      { "name": "信达生物等 GLP-1", "ticker": "减重赛道", "heat": "中高" },
+      { "name": "长鑫等存储器", "ticker": "存储扩产", "heat": "中 · 周期+国产" },
+      { "name": "封测 / HBM 配套", "ticker": "全球存储链", "heat": "跟随全球" }
+    ]
+  },
+  "accounts_seed": [
+    { "username": "mingchikuo", "name": "郭明錤｜Ming-Chi Kuo" },
+    { "username": "dylan522p", "name": "Dylan Patel" },
+    { "username": "Srasgon", "name": "Stacy Rasgon" },
+    { "username": "caolei1", "name": "曹山石" },
+    { "username": "baoshu88", "name": "包叔" },
+    { "username": "UniverseIce", "name": "Ice Universe" },
+    { "username": "jaygoldberg", "name": "Jay Goldberg 顾忠南" },
+    { "username": "AndyBiotech", "name": "Andy Biotech" },
+    { "username": "adamfeuerstein", "name": "Adam Feuerstein" },
+    { "username": "Beth_Kindig", "name": "Beth Kindig" },
+    { "username": "sanhuyanxishe", "name": "散户研习社" },
+    { "username": "NICOLASYANGX", "name": "尼可拉斯楊Live精" },
+    { "username": "freearkshaw", "name": "投研荟" },
+    { "username": "dacefupan", "name": "大策复盘" },
+    { "username": "wmtxxzz", "name": "【小作文】研报" },
+    { "username": "semivision_tw", "name": "SemiVision" },
+    { "username": "ChipsandWafers", "name": "Chips & Wafers" },
+    { "username": "KobeissiLetter", "name": "The Kobeissi Letter" },
+    { "username": "biancoresearch", "name": "Jim Bianco" },
+    { "username": "LizAnnSonders", "name": "Liz Ann Sonders" }
+  ]
 }
