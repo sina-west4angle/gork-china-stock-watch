@@ -4,19 +4,320 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>China Tech Watch & USA Biotech Intelligence · 小册子</title>
-  <!-- 完整内容请使用对话中提供的 china-tech-biotech-watch.html，或从 artifacts 下载后覆盖本文件 -->
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
-    .note { background: #f0f7ff; border: 1px solid #b8d4e8; padding: 16px; border-radius: 8px; }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=ZCOOL+XiaoWei&display=swap');
+    :root {
+      --sky: #a8d5e5; --sky-deep: #7eb8d4; --grass: #c5d9a4;
+      --paper: #f7f1e3; --ink: #3a2f2a; --ink-light: #5c4f47; --accent: #d4a574;
+      --accent-soft: #e8c9a0; --border: #d9cbb8; --shadow: rgba(58,47,42,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif SC', 'Songti SC', serif;
+      background: linear-gradient(180deg, #b8d4e8 0%, #d4e6c3 45%, #e8d9b8 100%);
+      color: var(--ink); min-height: 100vh; line-height: 1.7;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        radial-gradient(ellipse 80px 40px at 10% 15%, rgba(255,255,255,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 120px 50px at 85% 8%, rgba(255,255,255,0.35) 0%, transparent 70%);
+    }
+    .app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
+    header {
+      text-align: center; padding: 28px 20px 20px; background: var(--paper);
+      border-radius: 16px 16px 0 0; border: 1px solid var(--border); border-bottom: none;
+      box-shadow: 0 4px 24px var(--shadow);
+    }
+    .title { font-family: 'ZCOOL XiaoWei', serif; font-size: 1.85rem; font-weight: 600; }
+    .subtitle { margin-top: 6px; font-size: 0.95rem; color: var(--ink-light); }
+    .meta-row { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; font-size: 0.85rem; color: var(--ink-light); }
+    .date-badge { background: var(--accent-soft); padding: 4px 14px; border-radius: 999px; font-weight: 500; color: var(--ink); }
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px; }
+    button {
+      font-family: inherit; cursor: pointer; border: 1px solid var(--border); background: var(--paper);
+      color: var(--ink); padding: 8px 16px; border-radius: 999px; font-size: 0.88rem; transition: all 0.2s;
+    }
+    button:hover { background: var(--accent-soft); border-color: var(--accent); }
+    button.primary { background: var(--sky-deep); color: #fff; border-color: var(--sky-deep); }
+    button.danger { background: #f5e6e0; border-color: #e0b8a8; color: #8b4513; }
+    .booklet {
+      background: var(--paper); border: 1px solid var(--border); border-radius: 0 0 16px 16px;
+      box-shadow: 0 8px 32px var(--shadow); padding: 28px 24px 40px; min-height: 50vh;
+    }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
+    .tab { padding: 6px 14px; border-radius: 8px; font-size: 0.86rem; background: transparent; border: 1px solid transparent; color: var(--ink-light); }
+    .tab.active { background: var(--grass); color: var(--ink); border-color: #b5c98a; font-weight: 500; }
+    section { display: none; animation: fadeIn 0.35s ease; }
+    section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    h2 { font-size: 1.25rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .section-desc { font-size: 0.88rem; color: var(--ink-light); margin-bottom: 18px; }
+    .card { background: #fffdf8; border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+    .card-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+    .card-title { font-weight: 600; font-size: 1.02rem; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: var(--sky); color: #2a4a5a; }
+    .tag.bull { background: #c8e6c9; color: #1b5e20; }
+    .tag.bear { background: #ffcdd2; color: #b71c1c; }
+    .tag.neutral { background: #e0e0e0; color: #424242; }
+    .tag.biotech { background: #e1bee7; color: #4a148c; }
+    .tag.tech { background: #bbdefb; color: #0d47a1; }
+    .tag.score { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+    .card-body { font-size: 0.92rem; color: var(--ink-light); }
+    .card-body p { margin-bottom: 6px; }
+    .card-meta { margin-top: 10px; font-size: 0.78rem; color: #8a7a6a; display: flex; flex-wrap: wrap; gap: 12px; }
+    .source a { color: var(--sky-deep); text-decoration: underline; text-underline-offset: 2px; }
+    .company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .company-card { background: #fffdf8; border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+    .company-card .name { font-weight: 600; margin-bottom: 4px; }
+    .company-card .ticker { font-family: monospace; font-size: 0.85rem; color: var(--sky-deep); }
+    .company-card .heat { margin-top: 8px; font-size: 0.8rem; color: var(--ink-light); }
+    .accounts-panel { display: none; margin-top: 20px; padding: 20px; background: #f9f4eb; border-radius: 12px; border: 1px dashed var(--border); }
+    .accounts-panel.open { display: block; }
+    .accounts-list { max-height: 220px; overflow-y: auto; margin: 12px 0; font-size: 0.88rem; }
+    .account-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid #eee; }
+    .add-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .add-row input { flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.9rem; }
+    footer { text-align: center; margin-top: 32px; font-size: 0.8rem; color: var(--ink-light); opacity: 0.85; }
+    #tts-status { font-size: 0.8rem; color: var(--sky-deep); margin-left: 8px; }
+    .loading { text-align: center; padding: 40px; color: var(--ink-light); }
+    .error { background: #fdecea; border: 1px solid #f5c6cb; padding: 16px; border-radius: 8px; color: #721c24; }
+    @media (max-width: 640px) { .title { font-size: 1.4rem; } .booklet { padding: 18px 14px 30px; } }
   </style>
 </head>
 <body>
-  <h1>China Tech Watch & USA Biotech Intelligence</h1>
-  <div class="note">
-    <p><strong>完整网页文件较大，当前为占位说明。</strong></p>
-    <p>请下载对话中提供的 <code>china-tech-biotech-watch.html</code>，重命名为 <code>index.html</code> 后覆盖本文件，即可获得完整功能（朗读、账号管理、全部重要变化内容与 X 来源链接）。</p>
-    <p>结构化数据已完整保存在 <code>data/2026-09-06.json</code>。</p>
-    <p>仓库：<a href="https://github.com/sina-west4angle/gork-china-stock-watch">gork-china-stock-watch</a></p>
+  <div class="app">
+    <header>
+      <div class="title">China Tech Watch & USA Biotech Intelligence</div>
+      <div class="subtitle">中国科技观察 · 美国生物医药情报 · 重要变化筛选</div>
+      <div class="meta-row">
+        <span class="date-badge" id="current-date">加载中…</span>
+        <span>投资者专用 · 只呈现重要变化</span>
+      </div>
+      <div class="controls">
+        <button class="primary" onclick="speakAll()">🔊 朗读本页</button>
+        <button onclick="stopSpeak()">⏹ 停止</button>
+        <button onclick="toggleAccounts()">📋 管理关注账号</button>
+        <button onclick="reloadData()">🔄 重新加载数据</button>
+      </div>
+      <span id="tts-status"></span>
+    </header>
+
+    <div class="booklet">
+      <div class="accounts-panel" id="accounts-panel">
+        <h3 style="margin-bottom:8px;">关注的 X 账号（本地存储）</h3>
+        <div class="accounts-list" id="accounts-list"></div>
+        <div class="add-row">
+          <input type="text" id="new-username" placeholder="用户名（不含@）" />
+          <input type="text" id="new-name" placeholder="显示名称（可选）" />
+          <button class="primary" onclick="addAccount()">添加</button>
+        </div>
+      </div>
+
+      <nav class="tabs" id="tabs">
+        <button class="tab active" data-section="top10">今日最重要10变</button>
+        <button class="tab" data-section="stronger">观点转强</button>
+        <button class="tab" data-section="weaker">观点转弱</button>
+        <button class="tab" data-section="watchlist">今日最值得跟踪</button>
+      </nav>
+
+      <div id="content-area">
+        <div class="loading">正在从 GitHub 加载 2026-09-06 数据…</div>
+      </div>
+    </div>
+
+    <footer>
+      <p>China Tech Watch & USA Biotech Intelligence · 北京时间 UTC+8</p>
+      <p>数据源：<a href="https://github.com/sina-west4angle/gork-china-stock-watch" target="_blank">gork-china-stock-watch</a> · 非投资建议</p>
+    </footer>
   </div>
+
+  <script>
+    const DATA_URL = 'https://raw.githubusercontent.com/sina-west4angle/gork-china-stock-watch/main/data/2026-09-06.json';
+    const FALLBACK_DATA_URL = './data/2026-09-06.json';
+
+    let currentData = null;
+
+    async function loadData() {
+      const area = document.getElementById('content-area');
+      area.innerHTML = '<div class="loading">正在加载数据…</div>';
+      try {
+        let res = await fetch(DATA_URL + '?t=' + Date.now());
+        if (!res.ok) res = await fetch(FALLBACK_DATA_URL);
+        if (!res.ok) throw new Error('无法加载数据文件');
+        currentData = await res.json();
+        renderAll(currentData);
+      } catch (e) {
+        area.innerHTML = `<div class="error">加载失败：${e.message}<br>请确认仓库 data/2026-09-06.json 可公开访问，或使用本地完整版 HTML。</div>`;
+      }
+    }
+
+    function renderAll(data) {
+      document.getElementById('current-date').textContent =
+        (data.date || '').replace(/(\d{4})-(\d{2})-(\d{2})/, '$1年$2月$3日') + '（北京时间）';
+
+      const area = document.getElementById('content-area');
+      let html = '';
+
+      html += `<section id="top10" class="active">
+        <h2><span>📌</span> 今日最重要的 10 个变化</h2>
+        <p class="section-desc">筛选标准：可能影响股价、盈利或估值的新信息 · 北京时间 ${data.date || ''}</p>`;
+      (data.sections?.top10 || []).forEach(item => {
+        const tags = (item.tags || []).map(t => {
+          let cls = '';
+          if (t.includes('看多') || t.includes('产能') || t.includes('审批') || t.includes('临床')) cls = 'bull';
+          else if (t.includes('看空')) cls = 'bear';
+          else if (t.includes('生物') || t.includes('ADC') || t.includes('GLP')) cls = 'biotech';
+          else if (t.includes('科技') || t.includes('存储') || t.includes('HBM')) cls = 'tech';
+          else if (t.includes('中性') || t.includes('关注')) cls = 'neutral';
+          return `<span class="tag ${cls}">${t}</span>`;
+        }).join('');
+        const sources = (item.sources || []).map(s =>
+          `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`
+        ).join(' · ');
+        html += `<div class="card">
+          <div class="card-header">
+            <div class="card-title">${item.rank}. ${item.title}</div>
+            <div class="tags">${tags}<span class="tag score">影响分 ${item.impact_score || '-'}</span></div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>${item.what_changed || ''}</p>
+            <p><strong>为什么重要：</strong>${item.why_it_matters || ''}</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：${sources || '—'}</span>
+            <span>类别：${item.category || ''}</span>
+          </div>
+        </div>`;
+      });
+      html += `</section>`;
+
+      html += `<section id="stronger">
+        <h2><span>📈</span> 中国公司观点转强</h2>
+        <p class="section-desc">检测维度：1天 / 7天 / 30天 / 90天观点变化</p>`;
+      (data.sections?.stronger || []).forEach(item => {
+        html += `<div class="card">
+          <div class="card-header">
+            <div class="card-title">${item.title}</div>
+            <div class="tags"><span class="tag bull">${item.change || ''}</span></div>
+          </div>
+          <div class="card-body"><p>${item.detail || ''}</p></div>
+          <div class="card-meta"><span>比较窗口：${item.window || ''}</span></div>
+        </div>`;
+      });
+      html += `</section>`;
+
+      html += `<section id="weaker">
+        <h2><span>📉</span> 中国公司观点转弱</h2>
+        <p class="section-desc">需持续观察的潜在压力点</p>`;
+      (data.sections?.weaker || []).forEach(item => {
+        html += `<div class="card">
+          <div class="card-header">
+            <div class="card-title">${item.title}</div>
+            <div class="tags"><span class="tag neutral">${item.change || ''}</span></div>
+          </div>
+          <div class="card-body"><p>${item.detail || ''}</p></div>
+        </div>`;
+      });
+      html += `</section>`;
+
+      html += `<section id="watchlist">
+        <h2><span>⭐</span> 今日最值得跟踪的中国公司 / 主题</h2>
+        <p class="section-desc">综合讨论热度、事件催化与中长期逻辑</p>
+        <div class="company-grid">`;
+      (data.sections?.watchlist || []).forEach(c => {
+        html += `<div class="company-card">
+          <div class="name">${c.name}</div>
+          <div class="ticker">${c.ticker || ''}</div>
+          <div class="heat">热度：${c.heat || ''}</div>
+        </div>`;
+      });
+      html += `</div></section>`;
+
+      area.innerHTML = html;
+
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.onclick = () => {
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+          tab.classList.add('active');
+          const sec = document.getElementById(tab.dataset.section);
+          if (sec) sec.classList.add('active');
+          stopSpeak();
+        };
+      });
+    }
+
+    function reloadData() { loadData(); }
+
+    function getActiveText() {
+      const active = document.querySelector('section.active');
+      return active ? active.innerText : '';
+    }
+    function speakAll() {
+      stopSpeak();
+      const text = getActiveText();
+      if (!text) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN'; u.rate = 0.95;
+      document.getElementById('tts-status').textContent = '正在朗读…';
+      u.onend = () => document.getElementById('tts-status').textContent = '';
+      speechSynthesis.speak(u);
+    }
+    function stopSpeak() {
+      speechSynthesis.cancel();
+      document.getElementById('tts-status').textContent = '';
+    }
+
+    const DEFAULT_ACCOUNTS = [
+      { username: 'mingchikuo', name: '郭明錤｜Ming-Chi Kuo' },
+      { username: 'dylan522p', name: 'Dylan Patel' },
+      { username: 'Srasgon', name: 'Stacy Rasgon' },
+      { username: 'caolei1', name: '曹山石' },
+      { username: 'baoshu88', name: '包叔' },
+      { username: 'UniverseIce', name: 'Ice Universe' },
+      { username: 'jaygoldberg', name: 'Jay Goldberg 顾忠南' },
+      { username: 'AndyBiotech', name: 'Andy Biotech' },
+      { username: 'adamfeuerstein', name: 'Adam Feuerstein' },
+      { username: 'Beth_Kindig', name: 'Beth Kindig' },
+      { username: 'sanhuyanxishe', name: '散户研习社' },
+      { username: 'semivision_tw', name: 'SemiVision' },
+      { username: 'ChipsandWafers', name: 'Chips & Wafers' }
+    ];
+    function loadAccounts() {
+      try { return JSON.parse(localStorage.getItem('ctw_accounts')) || DEFAULT_ACCOUNTS; }
+      catch { return DEFAULT_ACCOUNTS; }
+    }
+    function saveAccounts(list) { localStorage.setItem('ctw_accounts', JSON.stringify(list)); }
+    function renderAccounts() {
+      const list = loadAccounts();
+      document.getElementById('accounts-list').innerHTML = list.map((a, i) =>
+        `<div class="account-item"><span>@${a.username} ${a.name ? '· ' + a.name : ''}</span>
+         <button class="danger" onclick="removeAccount(${i})" style="padding:2px 10px;font-size:0.8rem;">删除</button></div>`
+      ).join('');
+    }
+    function addAccount() {
+      const username = document.getElementById('new-username').value.trim().replace(/^@/, '');
+      const name = document.getElementById('new-name').value.trim();
+      if (!username || !/^[a-zA-Z0-9_]{1,15}$/.test(username)) { alert('请输入有效用户名'); return; }
+      const list = loadAccounts();
+      if (list.some(a => a.username.toLowerCase() === username.toLowerCase())) { alert('已存在'); return; }
+      list.push({ username, name: name || username });
+      saveAccounts(list); renderAccounts();
+      document.getElementById('new-username').value = '';
+      document.getElementById('new-name').value = '';
+    }
+    function removeAccount(i) {
+      const list = loadAccounts(); list.splice(i, 1); saveAccounts(list); renderAccounts();
+    }
+    function toggleAccounts() {
+      const p = document.getElementById('accounts-panel');
+      p.classList.toggle('open');
+      if (p.classList.contains('open')) renderAccounts();
+    }
+
+    loadData();
+  </script>
 </body>
 </html>
