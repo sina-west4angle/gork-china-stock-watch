@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>China Tech Watch & USA Biotech Intelligence · 小册子</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=ZCOOL+XiaoWei&display=swap');
+
+    :root {
+      --sky: #a8d5e5;
+      --sky-deep: #7eb8d4;
+      --grass: #c5d9a4;
+      --earth: #e8d5b5;
+      --paper: #f7f1e3;
+      --ink: #3a2f2a;
+      --ink-light: #5c4f47;
+      --accent: #d4a574;
+      --accent-soft: #e8c9a0;
+      --cloud: #ffffffcc;
+      --shadow: rgba(58, 47, 42, 0.12);
+      --border: #d9cbb8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Serif SC', 'Songti SC', serif;
+      background: linear-gradient(180deg, #b8d4e8 0%, #d4e6c3 45%, #e8d9b8 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Soft cloud decorations */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(ellipse 80px 40px at 10% 15%, rgba(255,255,255,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 120px 50px at 85% 8%, rgba(255,255,255,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 90px 35px at 70% 25%, rgba(255,255,255,0.3) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 28px 20px 20px;
+      background: var(--paper);
+      border-radius: 16px 16px 0 0;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      box-shadow: 0 4px 24px var(--shadow);
+      position: relative;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 12px;
+      background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    .title {
+      font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+      font-size: 1.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      font-size: 0.95rem;
+      color: var(--ink-light);
+    }
+
+    .meta-row {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--ink-light);
+    }
+
+    .date-badge {
+      background: var(--accent-soft);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    button:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button.primary {
+      background: var(--sky-deep);
+      color: #fff;
+      border-color: var(--sky-deep);
+    }
+
+    button.primary:hover {
+      background: #6aa8c4;
+    }
+
+    button.danger {
+      background: #f5e6e0;
+      border-color: #e0b8a8;
+      color: #8b4513;
+    }
+
+    /* Main booklet */
+    .booklet {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 8px 32px var(--shadow);
+      padding: 28px 24px 40px;
+      min-height: 60vh;
+    }
+
+    /* Navigation tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .tab {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--ink-light);
+    }
+
+    .tab.active {
+      background: var(--grass);
+      color: var(--ink);
+      border-color: #b5c98a;
+      font-weight: 500;
+    }
+
+    .tab:hover:not(.active) {
+      background: #eef5e0;
+    }
+
+    /* Sections */
+    section {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h2 .icon {
+      font-size: 1.1rem;
+    }
+
+    .section-desc {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      margin-bottom: 18px;
+    }
+
+    /* Cards */
+    .card {
+      background: #fffdf8;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+
+    .card-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.02rem;
+      flex: 1;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--sky);
+      color: #2a4a5a;
+    }
+
+    .tag.bull { background: #c8e6c9; color: #1b5e20; }
+    .tag.bear { background: #ffcdd2; color: #b71c1c; }
+    .tag.neutral { background: #e0e0e0; color: #424242; }
+    .tag.biotech { background: #e1bee7; color: #4a148c; }
+    .tag.tech { background: #bbdefb; color: #0d47a1; }
+    .tag.score {
+      background: var(--accent-soft);
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .card-body {
+      font-size: 0.92rem;
+      color: var(--ink-light);
+    }
+
+    .card-body p {
+      margin-bottom: 6px;
+    }
+
+    .card-meta {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #8a7a6a;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .source {
+      color: var(--sky-deep);
+    }
+
+    .source a {
+      color: var(--sky-deep);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .source a:hover {
+      color: #4a8fb0;
+    }
+
+    /* Company list */
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .company-card {
+      background: #fffdf8;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .company-card .name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .company-card .ticker {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--sky-deep);
+    }
+
+    .company-card .heat {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--ink-light);
+    }
+
+    /* Accounts panel */
+    .accounts-panel {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #f9f4eb;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+    }
+
+    .accounts-panel.open {
+      display: block;
+    }
+
+    .accounts-list {
+      max-height: 220px;
+      overflow-y: auto;
+      margin: 12px 0;
+      font-size: 0.88rem;
+    }
+
+    .account-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .account-item:last-child {
+      border-bottom: none;
+    }
+
+    .add-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .add-row input {
+      flex: 1;
+      min-width: 140px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+
+    /* Footer note */
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      opacity: 0.85;
+    }
+
+    /* TTS status */
+    #tts-status {
+      font-size: 0.8rem;
+      color: var(--sky-deep);
+      margin-left: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .title { font-size: 1.4rem; }
+      .booklet { padding: 18px 14px 30px; }
+      .tabs { gap: 6px; }
+      .tab { font-size: 0.8rem; padding: 5px 10px; }
+    }
+
+    /* Print friendly */
+    @media print {
+      body { background: white; }
+      body::before { display: none; }
+      .controls, .tabs, .accounts-panel { display: none !important; }
+      .booklet { box-shadow: none; border: none; }
+    }
+
+    #password-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(180deg, #b8d4e8 0%, #d4e6c3 50%, #e8d9b8 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    #password-gate.hidden { display: none; }
+    .gate-box {
+      background: #f7f1e3; border: 1px solid #d9cbb8; border-radius: 16px;
+      padding: 36px 32px; max-width: 360px; width: 90%;
+      box-shadow: 0 8px 32px rgba(58,47,42,0.15); text-align: center;
+    }
+    .gate-box h2 { font-size: 1.3rem; margin-bottom: 8px; color: #3a2f2a; }
+    .gate-box p { font-size: 0.9rem; color: #5c4f47; margin-bottom: 20px; }
+    .gate-box input {
+      width: 100%; padding: 12px 14px; border: 1px solid #d9cbb8;
+      border-radius: 8px; font-size: 1rem; font-family: inherit;
+      margin-bottom: 14px; background: #fff;
+    }
+    .gate-box button {
+      width: 100%; padding: 12px; background: #7eb8d4; color: #fff;
+      border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;
+      font-family: inherit;
+    }
+    .gate-box button:hover { background: #6aa8c4; }
+    .gate-error { color: #b71c1c; font-size: 0.85rem; margin-top: 10px; display: none; }
+
+  </style>
+</head>
+<body>
+
+  <div id="password-gate">
+    <div class="gate-box">
+      <h2>China Tech Watch</h2>
+      <p>请输入访问密码</p>
+      <input type="password" id="pw-input" placeholder="密码" autocomplete="current-password" />
+      <button onclick="checkPassword()">进入</button>
+      <div class="gate-error" id="pw-error">密码错误，请重试</div>
+    </div>
+  </div>
+
+  <div class="app">
+    <header>
+      <div class="title">China Tech Watch & USA Biotech Intelligence</div>
+      <div class="subtitle">中国科技观察 · 美国生物医药情报 · 重要变化筛选</div>
+      <div class="meta-row">
+        <span class="date-badge" id="current-date">2026年9月6日（北京时间）</span>
+        <span>投资者专用 · 只呈现重要变化</span>
+      </div>
+      <div class="controls">
+        <button class="primary" onclick="speakAll()" title="朗读当前页面全部内容">🔊 朗读本页</button>
+        <button onclick="stopSpeak()">⏹ 停止</button>
+        <button onclick="toggleAccounts()">📋 管理关注账号</button>
+        <button onclick="prevDate()">← 前一天</button>
+        <button onclick="nextDate()">后一天 →</button>
+      </div>
+      <span id="tts-status"></span>
+    </header>
+
+    <div class="booklet">
+      <!-- Accounts management -->
+      <div class="accounts-panel" id="accounts-panel">
+        <h3 style="margin-bottom:8px;">关注的 X 账号（本地存储，可增删）</h3>
+        <p style="font-size:0.85rem;color:var(--ink-light);margin-bottom:8px;">这些账号用于后续内容筛选参考。当前列表已预载你提供的部分高质量账号。</p>
+        <div class="accounts-list" id="accounts-list"></div>
+        <div class="add-row">
+          <input type="text" id="new-username" placeholder="用户名（不含@）" />
+          <input type="text" id="new-name" placeholder="显示名称（可选）" />
+          <button class="primary" onclick="addAccount()">添加</button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <nav class="tabs" id="tabs">
+        <button class="tab active" data-section="top10">今日最重要10变</button>
+        <button class="tab" data-section="stronger">观点转强</button>
+        <button class="tab" data-section="weaker">观点转弱</button>
+        <button class="tab" data-section="ratings">评级/目标价</button>
+        <button class="tab" data-section="attention">海外新增关注</button>
+        <button class="tab" data-section="supplychain">全球产业链影响</button>
+        <button class="tab" data-section="biotech">中国生物医药</button>
+        <button class="tab" data-section="watchlist">今日最值得跟踪</button>
+      </nav>
+
+      <!-- Section: Top 10 -->
+      <section id="top10" class="active">
+        <h2><span class="icon">📌</span> 今日最重要的 10 个变化</h2>
+        <p class="section-desc">筛选标准：可能影响股价、盈利或估值的新信息 · 来源质量与投资价值综合排序 · 北京时间 2026-09-06</p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">1. 国内 AI 芯片产能预期上修：卖方口径指向 2028 年底中芯先进产能显著高于 JPM 保守预测</div>
+            <div class="tags">
+              <span class="tag tech">中国科技</span>
+              <span class="tag bull">产能/供需</span>
+              <span class="tag score">影响分 82</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>市场此前引用的摩根大通约 500 万颗（2028）中国 AI 大芯片出货预测被部分产业链观察者认为偏保守。卖方口径显示中芯 N+1/N+2/N+3 先进产能有望从 2025 年底约 2.6 万片/月向 2028 年底 8–10 万片/月爬升，名义晶圆足以支撑更高出货，关键变量转为昇腾类大芯片切分比例、良率与 HBM/封装配套。</p>
+            <p><strong>为什么重要：</strong>直接影响国产算力供应链（中芯、华为昇腾生态、封测与存储配套）的中长期供给预期与估值弹性。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/LXC_X_/status/2096748053093134769" target="_blank" rel="noopener">@LXC_X_ 讨论 JPM 预测 vs 产能口径</a> · 产业链观察</span>
+            <span>类别：A 中国公司研究 · 产能</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">2. NMPA 9 月批准波：五款新药 + 两项新适应症获批</div>
+            <div class="tags">
+              <span class="tag biotech">中国生物医药</span>
+              <span class="tag bull">审批</span>
+              <span class="tag score">影响分 78</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>中国国家药品监督管理局（NMPA）在 9 月审批波中清除了五款新药及两项新适应症，显示创新药审评节奏维持积极。</p>
+            <p><strong>为什么重要：</strong>审批节奏直接影响相关公司商业化时间表与现金流预期，对 license-out 与国内定价谈判也有信号意义。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/Biopharm_China/status/2096720591675904383" target="_blank" rel="noopener">@Biopharm_China · NMPA 9月批准波</a></span>
+            <span>类别：F 中国生物医药 · NMPA</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">3. 正大天晴 HER2 双抗 ADC TQB2102 III 期达到终点，准备中国申报</div>
+            <div class="tags">
+              <span class="tag biotech">中国生物医药</span>
+              <span class="tag bull">临床/ADC</span>
+              <span class="tag score">影响分 85</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>正大天晴（CTTQ）的 HER2 双特异性 ADC TQB2102 在 HER2-low 乳腺癌 III 期试验中达到主要终点，公司准备推进中国申报。</p>
+            <p><strong>为什么重要：</strong>ADC + 双抗是当前中国创新药出海与 license-out 的高关注赛道；III 期阳性结果显著提升该资产的商业与 BD 价值。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/Biopharm_China/status/2096693418739032527" target="_blank" rel="noopener">@Biopharm_China · TQB2102 III期终点</a></span>
+            <span>类别：F 中国生物医药 · ADC · 临床</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">4. 上海成为海外患者癌症治疗新目的地：成本 + 创新疗法可及性提升</div>
+            <div class="tags">
+              <span class="tag biotech">中国生物医药</span>
+              <span class="tag bull">商业化/出海</span>
+              <span class="tag score">影响分 70</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>媒体报道显示，上海正吸引美国及其他富裕国家癌症患者前来治疗，原因不仅是成本较低，还包括中国在新型癌症疗法上的可及性与创新进展。</p>
+            <p><strong>为什么重要：</strong>反映中国创新药与临床服务在部分领域已具备跨境吸引力，对长期“创新药出海”叙事形成侧面支撑。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/Richard77778888/status/2096863005988549023" target="_blank" rel="noopener">@Richard77778888 转述 WSJ</a> · <a href="https://www.wsj.com/health/healthcare/patients-are-flying-to-china-for-the-latest-cancer-treatment-528659c3" target="_blank" rel="noopener">WSJ原文</a></span>
+            <span>类别：F 中国生物医药 · 商业化</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">5. 美股资金向 AI 半导体与存储集中，$MU 表现突出，HBM 产能扩张预期升温</div>
+            <div class="tags">
+              <span class="tag tech">全球科技</span>
+              <span class="tag bull">存储/HBM</span>
+              <span class="tag score">影响分 75</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>近期美股出现明显分化，半导体与存储板块（尤其是 $MU）表现强势，市场焦点集中在 HBM 产能扩张预期；同时就业数据推升利率预期，对高估值科技股形成压制。</p>
+            <p><strong>为什么重要：</strong>HBM 供需与价格直接影响全球 AI 算力成本，并可能传导至中国相关存储与封测公司的订单与盈利预期。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/FernlundAn/status/2096749911811543287" target="_blank" rel="noopener">@FernlundAn · 美股分化与 $MU / HBM</a></span>
+            <span>类别：E 全球产业链 → 中国公司</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">6. 中国创新药执行力被海外从业者进一步确认：R&D 速度与规模优势明显</div>
+            <div class="tags">
+              <span class="tag biotech">中国生物医药</span>
+              <span class="tag neutral">产业格局</span>
+              <span class="tag score">影响分 72</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>多位有中国实地调研经历的海外生物科技从业者持续强调：中国 biotech 在可工程化的药理学问题上执行速度与规模已形成明显优势；美国优势仍在新型生物学与转化医学深度。</p>
+            <p><strong>为什么重要：</strong>这强化了“中国执行 + 美国新颖生物学”的合作/竞争框架，影响 license-in/out 定价与管线布局策略。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/davidycli/status/1875043192330224119" target="_blank" rel="noopener">@davidycli 中国biotech执行力讨论</a> · 海外从业者汇总</span>
+            <span>类别：C 大V/投资者观点 · D 海外关注</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">7. 中国 GLP-1 / 减重药物市场竞争加剧：信达等国内玩家与诺和/礼来/辉瑞博弈</div>
+            <div class="tags">
+              <span class="tag biotech">中国生物医药</span>
+              <span class="tag neutral">竞争格局</span>
+              <span class="tag score">影响分 68</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>中国肥胖症药物市场被多方视为重要战场，处方药广告限制下“隐形推广”与渠道策略成为焦点；信达生物等国内公司与跨国药企在 GLP-1 赛道的竞争与合作并存。</p>
+            <p><strong>为什么重要：</strong>减重赛道是全球最高关注度治疗领域之一，中国市场准入与价格策略将影响相关公司估值与出海节奏。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/nikkeimatome/status/2096686175541146060" target="_blank" rel="noopener">@nikkeimatome · 中国GLP-1市场竞争</a></span>
+            <span>类别：F 中国生物医药 · GLP-1</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">8. 华为持续加大基础技术投入，在国产替代叙事中角色进一步强化</div>
+            <div class="tags">
+              <span class="tag tech">中国科技</span>
+              <span class="tag bull">国产替代</span>
+              <span class="tag score">影响分 74</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>近期报道与分析继续强调华为在研发上的大规模投入，试图替代失去的美国技术，并在更多中国企业中成为关键供应商/平台。</p>
+            <p><strong>为什么重要：</strong>华为生态的扩张直接影响上游半导体设备、材料、EDA 与下游应用公司的订单可见度。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/TheEconomist/status/2096428203434770667" target="_blank" rel="noopener">@TheEconomist · 华为研发与国产替代</a></span>
+            <span>类别：A 中国公司研究 · 经营变化</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">9. 中国存储器（CXMT 等）在行业低谷期扩产，试图打破长期寡头格局</div>
+            <div class="tags">
+              <span class="tag tech">中国科技</span>
+              <span class="tag bull">存储</span>
+              <span class="tag score">影响分 71</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>长鑫等中国存储企业在行业下行期继续扩产，利用全球对手聚焦 AI 带来的窗口，试图改写持续约 30 年的存储寡头格局。</p>
+            <p><strong>为什么重要：</strong>供给端变化可能影响 DRAM/NAND 价格周期，并带动国内设备与材料公司的中长期订单。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/TMTPostGlobal/status/2081920862241124487" target="_blank" rel="noopener">@TMTPostGlobal · CXMT 存储器反击</a></span>
+            <span>类别：A 中国公司研究 · 产能</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">10. 海外机构对中国 AI / 芯片公司的讨论热度维持高位，但 Attention ≠ Bullish</div>
+            <div class="tags">
+              <span class="tag tech">中国科技</span>
+              <span class="tag neutral">关注度</span>
+              <span class="tag score">影响分 65</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>什么变了：</strong>多个高质量海外账号与研究机构持续讨论中国 AI 模型、开源进展与芯片供应链。Attention Score 上升，但 Sentiment 与 Fundamental 需单独跟踪，避免把“被讨论”直接等同于“看多”。</p>
+            <p><strong>为什么重要：</strong>符合你要求的 D 类指标拆分：Attention / Sentiment / Fundamental 三者独立。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：多账号讨论汇总 · 示例：<a href="https://x.com/TMTPostGlobal" target="_blank" rel="noopener">@TMTPostGlobal</a> · <a href="https://x.com/dylan522p" target="_blank" rel="noopener">@dylan522p</a></span>
+            <span>类别：D 海外机构关注变化</span>
+            <span>北京时间 2026-09-06</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Stronger -->
+      <section id="stronger">
+        <h2><span class="icon">📈</span> 中国公司观点转强</h2>
+        <p class="section-desc">检测维度：1天 / 7天 / 30天 / 90天观点变化 · 当前为 2026-09-06 快照</p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">国产 AI 芯片供应链（中芯相关先进产能）</div>
+            <div class="tags"><span class="tag bull">看多 → 更看多</span></div>
+          </div>
+          <div class="card-body">
+            <p>部分产业链与卖方讨论从“供给严重不足”转向“名义产能可能快于部分外资行预测”，关键瓶颈从“有没有晶圆”转向“大芯片切分比例 + 良率 + HBM 配套”。</p>
+          </div>
+          <div class="card-meta"><span>比较窗口：约 30 天</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">中国 ADC / 双抗创新药资产</div>
+            <div class="tags"><span class="tag bull">中性 → 看多</span></div>
+          </div>
+          <div class="card-body">
+            <p>TQB2102 III 期阳性等事件强化“中国 ADC 资产具备全球竞争力”的叙事，license-out 与国内申报预期同步上修。</p>
+          </div>
+          <div class="card-meta"><span>比较窗口：约 7–30 天</span></div>
+        </div>
+      </section>
+
+      <!-- Section: Weaker -->
+      <section id="weaker">
+        <h2><span class="icon">📉</span> 中国公司观点转弱</h2>
+        <p class="section-desc">当前快照中，明确“转弱”信号相对有限，以下为需持续观察的潜在压力点。</p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">高估值纯 AI 应用/模型公司（部分）</div>
+            <div class="tags"><span class="tag bear">关注度高但盈利路径仍模糊</span></div>
+          </div>
+          <div class="card-body">
+            <p>海外讨论对中国开源模型能力表示认可，但对商业化与算力成本的可持续性仍存分歧。Attention 高 ≠ 基本面立即转强。</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">利率敏感的高估值科技板块（间接）</div>
+            <div class="tags"><span class="tag neutral">宏观压制</span></div>
+          </div>
+          <div class="card-body">
+            <p>美股就业数据推升利率预期，对全球高估值科技形成共性压力，可能间接影响中概与港股科技估值中枢。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Ratings -->
+      <section id="ratings">
+        <h2><span class="icon">🏷️</span> 券商评级 / 目标价变化</h2>
+        <p class="section-desc">本日公开渠道中，具体“首次覆盖 / 上调 / 下调 + 明确目标价数字”的高频披露较少。以下为相关方向性信息与监控提示。</p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">监控提示：中国 AI 芯片相关标的</div>
+            <div class="tags"><span class="tag tech">待更新</span></div>
+          </div>
+          <div class="card-body">
+            <p>多家外资与中资卖方对国产算力供应链保持跟踪。建议后续重点捕捉：目标价上调/下调、EPS/收入预测修订、首次覆盖报告。</p>
+            <p>当前公开讨论更多集中在产能与供需，而非具体目标价数字变更。</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">生物医药：ADC / 创新药管线</div>
+            <div class="tags"><span class="tag biotech">事件驱动</span></div>
+          </div>
+          <div class="card-body">
+            <p>III 期阳性与 NMPA 批准通常会触发卖方更新模型。请关注后续 1–2 周内是否出现目标价或评级正式调整。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Attention -->
+      <section id="attention">
+        <h2><span class="icon">👀</span> 海外机构新增关注的中国公司</h2>
+        <p class="section-desc">Attention Score 上升 · 但必须与 Sentiment、Fundamental 分开记录</p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">国产 AI 芯片 / 昇腾生态相关公司</div>
+            <div class="tags">
+              <span class="tag">Attention ↑</span>
+              <span class="tag neutral">Sentiment 分化</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>多个海外研究与讨论线程持续覆盖中国先进产能与 AI 芯片出货预测。首次深度讨论与频率上升并存。</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">中国 ADC / 双抗创新药公司</div>
+            <div class="tags">
+              <span class="tag">Attention ↑</span>
+              <span class="tag bull">Sentiment 偏积极</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>海外 biotech 从业者与媒体对中国 ADC 资产的执行力与临床进度保持高关注，license-out 叙事强化。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Supply chain -->
+      <section id="supplychain">
+        <h2><span class="icon">🔗</span> 全球产业链 → 中国公司影响</h2>
+        <p class="section-desc">明确区分「事实」与「AI 推断」</p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">HBM / 存储价格与产能 → 中国存储与封测</div>
+            <div class="tags"><span class="tag tech">事实 + 推断</span></div>
+          </div>
+          <div class="card-body">
+            <p><strong>事实：</strong>美股存储板块（尤其 $MU）因 HBM 扩张预期表现强势，全球资金向 AI 半导体与存储集中。</p>
+            <p><strong>推断：</strong>若 HBM 供需持续紧张，可能抬升整体存储价格周期，对中国存储厂商（如长鑫相关）及封测公司的订单与盈利产生正向或竞争双重影响，需跟踪具体份额与客户结构。</p>
+            <p><strong>直接/间接受益候选：</strong>国内存储、封测、部分设备材料公司（需进一步验证）。</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">全球 AI 算力需求 → 中国先进晶圆与配套</div>
+            <div class="tags"><span class="tag tech">推断</span></div>
+          </div>
+          <div class="card-body">
+            <p>海外 AI 需求维持高位，叠加出口管制，强化了国内对先进产能与国产替代的刚性需求。中芯先进节点爬坡速度成为关键变量。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Biotech -->
+      <section id="biotech">
+        <h2><span class="icon">🧬</span> 中国生物医药重要变化</h2>
+        <p class="section-desc">重点：新药 · 临床 · FDA/NMPA · License · ADC · GLP-1 · 出海</p>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">NMPA 9 月新药与新适应症批准</div>
+            <div class="tags"><span class="tag biotech">NMPA</span></div>
+          </div>
+          <div class="card-body">
+            <p>五款新药 + 两项新适应症获批，审评节奏保持积极。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/Biopharm_China/status/2096720591675904383" target="_blank" rel="noopener">@Biopharm_China</a></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">正大天晴 TQB2102（HER2 双抗 ADC）III 期成功</div>
+            <div class="tags"><span class="tag biotech">ADC · 临床</span></div>
+          </div>
+          <div class="card-body">
+            <p>HER2-low 乳腺癌 III 期达到终点，准备中国申报。对国内 ADC 赛道与潜在 license-out 价值有正面信号。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/Biopharm_China/status/2096693418739032527" target="_blank" rel="noopener">@Biopharm_China</a></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">上海吸引海外癌症患者：创新疗法可及性提升</div>
+            <div class="tags"><span class="tag biotech">商业化</span></div>
+          </div>
+          <div class="card-body">
+            <p>成本与创新疗法双重因素推动跨境就医，侧面验证中国在部分肿瘤治疗领域的进展。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/Richard77778888/status/2096863005988549023" target="_blank" rel="noopener">@Richard77778888 转述 WSJ</a></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">GLP-1 / 减重市场：国内与跨国玩家竞争升级</div>
+            <div class="tags"><span class="tag biotech">GLP-1</span></div>
+          </div>
+          <div class="card-body">
+            <p>信达等国内公司与诺和、礼来、辉瑞等在中国肥胖症药物市场的博弈成为行业焦点。</p>
+          </div>
+          <div class="card-meta">
+            <span class="source">来源：<a href="https://x.com/nikkeimatome/status/2096686175541146060" target="_blank" rel="noopener">@nikkeimatome</a></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Watchlist -->
+      <section id="watchlist">
+        <h2><span class="icon">⭐</span> 今日最值得跟踪的中国公司 / 主题</h2>
+        <p class="section-desc">综合讨论热度、事件催化与中长期逻辑</p>
+
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="name">中芯国际相关先进产能</div>
+            <div class="ticker">国产算力核心</div>
+            <div class="heat">热度：高 · 产能爬坡</div>
+          </div>
+          <div class="company-card">
+            <div class="name">华为昇腾生态</div>
+            <div class="ticker">AI 芯片需求</div>
+            <div class="heat">热度：高 · 国产替代</div>
+          </div>
+          <div class="company-card">
+            <div class="name">正大天晴 / ADC 资产</div>
+            <div class="ticker">TQB2102</div>
+            <div class="heat">热度：事件驱动</div>
+          </div>
+          <div class="company-card">
+            <div class="name">信达生物等 GLP-1</div>
+            <div class="ticker">减重赛道</div>
+            <div class="heat">热度：中高</div>
+          </div>
+          <div class="company-card">
+            <div class="name">长鑫等存储器</div>
+            <div class="ticker">存储扩产</div>
+            <div class="heat">热度：中 · 周期+国产</div>
+          </div>
+          <div class="company-card">
+            <div class="name">封测 / HBM 配套</div>
+            <div class="ticker">全球存储链</div>
+            <div class="heat">热度：跟随全球</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>China Tech Watch & USA Biotech Intelligence · 只筛选重要变化 · 北京时间 UTC+8</p>
+      <p>本页为独立前端小册子 · 内容按投资相关性过滤 · 非投资建议</p>
+      <p>数据日期：2026年9月6日 · 后续可按日期继续追加</p>
+    </footer>
+  </div>
+
+  <script>
+    // ========== Date handling ==========
+    const dates = ['2026-09-06'];
+    let currentDateIndex = 0;
+
+    function formatDate(d) {
+      const [y, m, day] = d.split('-');
+      return `${y}年${parseInt(m)}月${parseInt(day)}日（北京时间）`;
+    }
+
+    function updateDateDisplay() {
+      document.getElementById('current-date').textContent = formatDate(dates[currentDateIndex]);
+    }
+
+    function prevDate() {
+      if (currentDateIndex > 0) {
+        currentDateIndex--;
+        updateDateDisplay();
+        // Future: load content for that date
+      } else {
+        alert('已是最早一期（2026-09-06）');
+      }
+    }
+
+    function nextDate() {
+      if (currentDateIndex < dates.length - 1) {
+        currentDateIndex++;
+        updateDateDisplay();
+      } else {
+        alert('已是最新一期。后续更新将追加新日期。');
+      }
+    }
+
+    // ========== Tabs ==========
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.section).classList.add('active');
+        stopSpeak();
+      });
+    });
+
+    // ========== TTS ==========
+    let utterance = null;
+
+    function getActiveText() {
+      const active = document.querySelector('section.active');
+      if (!active) return '';
+      return active.innerText;
+    }
+
+    function speakAll() {
+      stopSpeak();
+      const text = getActiveText();
+      if (!text) return;
+      utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'zh-CN';
+      utterance.rate = 0.95;
+      utterance.pitch = 1;
+      const status = document.getElementById('tts-status');
+      status.textContent = '正在朗读…';
+      utterance.onend = () => { status.textContent = ''; };
+      utterance.onerror = () => { status.textContent = '朗读出错'; };
+      speechSynthesis.speak(utterance);
+    }
+
+    function stopSpeak() {
+      speechSynthesis.cancel();
+      document.getElementById('tts-status').textContent = '';
+    }
+
+    // ========== Accounts (localStorage) ==========
+    const DEFAULT_ACCOUNTS = [
+      { username: 'mingchikuo', name: '郭明錤｜Ming-Chi Kuo' },
+      { username: 'dylan522p', name: 'Dylan Patel' },
+      { username: 'Srasgon', name: 'Stacy Rasgon' },
+      { username: 'caolei1', name: '曹山石' },
+      { username: 'baoshu88', name: '包叔' },
+      { username: 'UniverseIce', name: 'Ice Universe' },
+      { username: 'jaygoldberg', name: 'Jay Goldberg 顾忠南' },
+      { username: 'AndyBiotech', name: 'Andy Biotech' },
+      { username: 'adamfeuerstein', name: 'Adam Feuerstein' },
+      { username: 'Beth_Kindig', name: 'Beth Kindig' },
+      { username: 'sanhuyanxishe', name: '散户研习社' },
+      { username: 'NICOLASYANGX', name: '尼可拉斯楊Live精' },
+      { username: 'freearkshaw', name: '投研荟' },
+      { username: 'dacefupan', name: '大策复盘' },
+      { username: 'wmtxxzz', name: '【小作文】研报' },
+      { username: 'semivision_tw', name: 'SemiVision' },
+      { username: 'ChipsandWafers', name: 'Chips & Wafers' },
+      { username: 'KobeissiLetter', name: 'The Kobeissi Letter' },
+      { username: 'biancoresearch', name: 'Jim Bianco' },
+      { username: 'LizAnnSonders', name: 'Liz Ann Sonders' }
+    ];
+
+    function loadAccounts() {
+      const raw = localStorage.getItem('ctw_accounts');
+      if (raw) {
+        try { return JSON.parse(raw); } catch(e) {}
+      }
+      return [...DEFAULT_ACCOUNTS];
+    }
+
+    function saveAccounts(list) {
+      localStorage.setItem('ctw_accounts', JSON.stringify(list));
+    }
+
+    function renderAccounts() {
+      const list = loadAccounts();
+      const el = document.getElementById('accounts-list');
+      el.innerHTML = list.map((a, i) => `
+        <div class="account-item">
+          <span>@${a.username} ${a.name ? '· ' + a.name : ''}</span>
+          <button class="danger" onclick="removeAccount(${i})" style="padding:2px 10px;font-size:0.8rem;">删除</button>
+        </div>
+      `).join('');
+    }
+
+    function addAccount() {
+      const username = document.getElementById('new-username').value.trim().replace(/^@/, '');
+      const name = document.getElementById('new-name').value.trim();
+      if (!username || !/^[a-zA-Z0-9_]{1,15}$/.test(username)) {
+        alert('请输入有效的 Twitter 用户名（1-15 位字母数字下划线）');
+        return;
+      }
+      const list = loadAccounts();
+      if (list.some(a => a.username.toLowerCase() === username.toLowerCase())) {
+        alert('该账号已存在');
+        return;
+      }
+      list.push({ username, name: name || username });
+      saveAccounts(list);
+      renderAccounts();
+      document.getElementById('new-username').value = '';
+      document.getElementById('new-name').value = '';
+    }
+
+    function removeAccount(index) {
+      const list = loadAccounts();
+      list.splice(index, 1);
+      saveAccounts(list);
+      renderAccounts();
+    }
+
+    function toggleAccounts() {
+      const panel = document.getElementById('accounts-panel');
+      panel.classList.toggle('open');
+      if (panel.classList.contains('open')) renderAccounts();
+    }
+
+    
+    const CORRECT_PASSWORD = 'west4angle@gmail.com';
+    function checkPassword() {
+      const input = document.getElementById('pw-input');
+      const err = document.getElementById('pw-error');
+      if (input.value === CORRECT_PASSWORD) {
+        sessionStorage.setItem('ctw_auth', '1');
+        document.getElementById('password-gate').classList.add('hidden');
+        err.style.display = 'none';
+      } else {
+        err.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+    (function() {
+      const el = document.getElementById('pw-input');
+      if (el) el.addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPassword(); });
+      if (sessionStorage.getItem('ctw_auth') === '1') {
+        const gate = document.getElementById('password-gate');
+        if (gate) gate.classList.add('hidden');
+      }
+    })();
+
+    // Init
+    updateDateDisplay();
+    renderAccounts();
+  </script>
+</body>
+</html>
