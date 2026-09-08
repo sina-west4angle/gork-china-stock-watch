@@ -471,25 +471,43 @@
       return `${y}年${parseInt(m)}月${parseInt(day)}日（北京时间）`;
     }
 
-    async function initializeDates() {
-      const today = new Date('2026-09-06');
-      const oneMonthAgo = new Date(today);
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-      
-      availableDates = generateDateRange(oneMonthAgo, 2);
-      
-      const select = document.getElementById('date-select');
-      select.innerHTML = '<option value="">选择日期...</option>';
-      availableDates.forEach(date => {
-        const option = document.createElement('option');
-        option.value = date;
-        option.textContent = formatDate(date);
-        select.appendChild(option);
-      });
-      
-      await loadData('2026-09-06');
+      async function initializeDates() {
+      try {
+        // 从 GitHub 获取 data 文件夹里的所有文件
+        const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_DIR}`);
+        const files = await response.json();
+        
+        // 只保留 .json 文件，并提取日期
+        availableDates = files
+          .filter(f => f.name.endsWith('.json'))
+          .map(f => f.name.replace('.json', ''))
+          .sort()
+          .reverse();   // 最新的日期排在前面
+        
+        if (availableDates.length === 0) {
+          document.getElementById('loading-indicator').innerHTML = '<p>暂无任何数据文件</p>';
+          return;
+        }
+        
+        // 填充日期下拉框
+        const select = document.getElementById('date-select');
+        select.innerHTML = '<option value="">选择日期...</option>';
+        availableDates.forEach(date => {
+          const option = document.createElement('option');
+          option.value = date;
+          option.textContent = formatDate(date);
+          select.appendChild(option);
+        });
+        
+        // 自动加载最新的一天
+        await loadData(availableDates[0]);
+      } catch (error) {
+        console.error('获取日期列表失败:', error);
+        // 如果获取失败，就退回用原来的 2026-09-06
+        availableDates = ['2026-09-06'];
+        await loadData('2026-09-06');
+      }
     }
-
     async function loadData(dateStr) {
       if (DATA_CACHE[dateStr]) {
         renderData(DATA_CACHE[dateStr]);
